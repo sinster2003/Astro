@@ -1,0 +1,16 @@
+#userpic
+{
+    display: none;
+}
+
+.user-pic label
+{
+    position: relative;
+    text-align: center;
+}
+
+#profile
+{
+    height: 5rem;
+    width: 5rem;
+}

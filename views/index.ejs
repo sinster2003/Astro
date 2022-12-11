@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="/styles/home.css" rel="stylesheet">
+    <script src="/scripts/home.js" defer></script>
+    <title>Astro</title>
+</head>
+
+<body>
+    <!-- animated background image -->
+    <section class="animated-background-section">
+        <div class="animated-background">
+            <img src="/images/home-image.jpg" alt="nebula" id="background-image">
+        </div>
+    </section>
+
+    <!-- header  -->
+    <section class="home-content-section">
+        <section class="home-content">
+            <nav>
+                <h1 id="home-title">Astro</h1>
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <% if(data.isAuth){ %>
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    <% } %>
+                    <% if(!data.isAuth){ %>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/login">Log In</a></li>
+                    <% } %>
+                    <li><a href="/about">About Us</a></li>
+                    <%if(user){%>
+                        <a href="/profile"><img src="<%=user.userImage%>" id="profile-pic"></a>
+                    <%}%>
+                </ul>
+            </nav>
+
+            <div class="tag-line-div">
+                <h2 id="tag-line">Explore Space .</h2>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="3em"
+                    width="3em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
+                    </path>
+                </svg>
+            </div>
+        </section>
+        <main class="main-content">
+            <div class="main-content-div">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="3em"
+                    width="3em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M256 217.9L383 345c9.4 9.4 24.6 9.4 33.9 0 9.4-9.4 9.3-24.6 0-34L273 167c-9.1-9.1-23.7-9.3-33.1-.7L95 310.9c-4.7 4.7-7 10.9-7 17s2.3 12.3 7 17c9.4 9.4 24.6 9.4 33.9 0l127.1-127z">
+                    </path>
+                </svg>
+                <h3>Explore</h3>
+            </div>
+        </main>
+    </section>
+    </section>
+</body>
+
+</html>

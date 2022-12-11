@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#background-image{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+    animation: homeimage 10s linear infinite;
+}
+
+.home-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-image:linear-gradient(to bottom , rgba(71, 71, 71, 0.251) , rgba(255, 178, 255, 0.061));
+    position: relative;
+}
+
+.home-content nav
+{
+    width: 100vw;
+}
+
+.home-content nav,.nav-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#home-title,.nav-list li a,#tag-line{
+    color: rgb(254, 246, 255);
+    font-family: 'Montserrat', sans-serif;
+    padding: 2.5rem;
+}
+
+#home-title{
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+.nav-list li a{
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 0 2rem;
+    text-decoration: none;
+}
+
+.tag-line-div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#tag-line
+{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 6rem;
+    margin: 11vw 11vw 14vw;
+    padding: 0;
+}
+
+.tag-line-div svg
+{
+    cursor: pointer;
+}
+
+.tag-line-div svg path
+{
+    color: rgb(254, 246, 255);
+}
+
+.home-content-section-transform
+{
+    transform: translateY(-100vh);
+    transition: transform 1s ease;
+}
+
+.home-content-section-transformUp
+{
+    transform: translateY(0vh);
+    transition: transform 1s ease;
+}
+
+h3{
+    font-size: 10rem;
+    color: white;
+}
+
+.main-content
+{
+    width: 100vw;
+    position: absolute;
+    top:0;
+    left: 0;
+    visibility: hidden;
+}
+
+.main-content h3
+{
+    font-size: 4rem;
+    font-family: "Montserrat","sans-serif";
+    font-weight: 800;
+    padding: 5rem 2rem;
+}
+
+.main-content-visible
+{
+    visibility: visible;
+}
+
+.main-content-div svg
+{
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%,0);
+    cursor: pointer;
+}
+
+.main-content-div svg path{
+    color: rgb(254, 246, 255);
+}
+
+#profile-pic
+{
+    height: 3rem;
+    width: 3rem;
+    margin: 0 2rem 0 1rem;
+}
+
+@keyframes homeimage {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.015);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    75% {
+        transform: scale(1.015);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

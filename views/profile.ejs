@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="/styles/signup.css" rel="stylesheet">
+    <link href="/styles/login.css" rel="stylesheet">
+    <link href="/styles/profile.css" rel="stylesheet">
+    <script src="/scripts/profile.js" defer></script>
+    <title>Profile | Astro</title>
+</head>
+
+<body>
+    <main class="main-content">
+        <div class="sign-up-form-div">
+            <div class="box-shadow-div">
+                <div>
+                    <h1>Profile</h1>
+                    <h2>View your Profile</h2>
+                    <form action="/profile" method="POST" enctype="multipart/form-data" class="signup-form profile-page">
+                        <div class="user-pic">
+                            <input type="file" name="userpic" id="userpic" accept="image/jpeg,image/png">
+                            <label for="userpic"><img src="/images/profile.png" id="profile"></label>
+                            <p id="instruction">Add Your Profile Picture</p>
+                        </div>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

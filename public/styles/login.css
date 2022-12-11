@@ -1,0 +1,14 @@
+.main-content
+{
+    height:100vh;
+}
+
+.box-shadow-div
+{
+    justify-content: center;
+    height:60vh;
+}
+
+h2{
+    padding: 0 0 2rem 0;
+}

@@ -1,0 +1,119 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.main-content
+{
+    display: flex;
+    align-items: center;
+}
+
+.photo img
+{
+    width: 50vw;
+    height: 105vh;
+    object-fit: cover;
+    animation: homeimage 10s linear infinite;
+}
+
+.sign-up-form-div,.signup-form div,.box-shadow-div
+{
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat",sans-serif;
+    margin: auto;
+}
+
+.sign-up-form-div
+{
+    width: 50vw;
+    overflow: visible;
+}
+
+.box-shadow-div
+{
+    width: 60%;
+    height: 70vh;
+    padding: 1rem 0 1rem 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgb(218, 216, 216);
+    justify-content: center;
+}
+
+.signup-form
+{
+    width: 21vw;
+    margin: auto;
+}
+
+.sign-up-form-div h1{
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.sign-up-form-div h2{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.sign-up-form-div h1,h2,div{
+    padding: 0 0 1rem 0;
+    text-align: center;
+}
+
+.sign-up-form-div label{
+    padding: 0 0 0.5rem 0;
+    text-align: left;
+}
+
+#username,#email,#password
+{
+    height:2.5rem;
+    font-size: 1rem;
+    font-family: "Montserrat",sans-serif;
+    padding:0.25rem;
+    outline: none;
+}
+
+#password
+{
+    font-weight: 800;
+}
+
+button{
+    height: 2.25rem;
+    font-family: "Montserrat",sans-serif;
+    width: 50%;
+    margin: 0.5rem 0 1rem 0;
+    cursor: pointer;
+}
+
+p > a{
+    text-decoration: none;
+}
+
+@keyframes homeimage {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.015);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    75% {
+        transform: scale(1.015);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
