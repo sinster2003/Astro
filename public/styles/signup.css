@@ -6,6 +6,12 @@
     overflow: hidden;
 }
 
+::selection
+{
+    background-color: rgba(255, 150, 239, 0.614);
+    color: rgb(0, 0, 0);
+}
+
 .main-content
 {
     display: flex;
@@ -37,11 +43,12 @@
 .box-shadow-div
 {
     width: 60%;
-    height: 70vh;
+    height: 75vh;
     padding: 1rem 0 1rem 0;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 5px rgb(218, 216, 216);
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .signup-form
@@ -94,6 +101,50 @@ button{
 
 p > a{
     text-decoration: none;
+}
+
+#image-cover
+{
+    position: absolute;
+    top: 2rem;
+    left: 1rem;
+    z-index: 1;
+}
+
+#image-cover h3,#image-cover h4,#image-cover p
+{
+    color: rgb(254, 246, 255);
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    padding: 0;
+}
+
+#image-cover h3
+{
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+#image-cover h4
+{
+    font-weight: 900;
+    font-size: 4.5rem;
+    padding: 15rem 0 0 2rem;
+
+}
+
+#image-cover p
+{
+    font-size: 1.25rem;
+    padding-left: 2rem;
+}
+
+#Error
+{
+    color: red;
+    background-color: rgb(254, 208, 208);
+    padding:1rem;
+    margin-bottom: 1rem;
 }
 
 @keyframes homeimage {

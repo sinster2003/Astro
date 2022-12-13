@@ -27,7 +27,7 @@
                     <form action="/profile" method="POST" enctype="multipart/form-data" class="signup-form profile-page">
                         <div class="user-pic">
                             <input type="file" name="userpic" id="userpic" accept="image/jpeg,image/png">
-                            <label for="userpic"><img src="/images/profile.png" id="profile"></label>
+                            <label for="userpic"><img src="<%=user.userImage%>" id="profile"></label>
                             <p id="instruction">Add Your Profile Picture</p>
                         </div>
                         <button type="submit">Add</button>

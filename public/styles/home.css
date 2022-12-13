@@ -5,6 +5,12 @@
     overflow: hidden;
 }
 
+::selection
+{
+    background-color: rgba(255, 150, 239, 0.295);
+    color: rgb(254, 246, 255);
+}
+
 #background-image{
     width: 100vw;
     height: 100vh;

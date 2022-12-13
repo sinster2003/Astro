@@ -40,6 +40,27 @@ app.use(session({
 }));
 app.use("/profileimages",express.static("profileimages"));
 
+app.use(function(req,res,next){
+    let input = req.session.userInput;
+
+    if(!input)
+    {
+        input={
+            isError:false,
+            message:"",
+            name:"",
+            email:"",
+            password:""
+        }
+    }
+
+    req.session.userInput = null;
+
+    res.locals.input=input;
+
+    next();
+});
+
 app.get("/",async (req,res)=>{
 
     const members = await db.getDb().collection("members").find();
@@ -62,7 +83,7 @@ app.get("/",async (req,res)=>{
     res.render("index",{data:data,user:null});
 });
 
-app.get("/signup",(req,res)=>{
+app.get("/signup",async (req,res)=>{
     res.render("signup");
 });
 
@@ -80,6 +101,33 @@ app.post("/signup",async (req,res)=>{
         userEmail:userEmail,
         userPassword:userPassword,
         userImage:imagePath
+    }
+    
+    const user = await db.getDb().collection("members").findOne({userEmail:userEmail});
+
+    if(password.length<5 || !userEmail.includes("@") || !userName || !userEmail || !password)
+    {
+        req.session.userInput={
+            isError:true,
+            message:"Password too short",
+            name: userName,
+            email: userEmail,
+            password: password
+        };
+
+        return res.redirect("/signup");
+    }
+
+    if(user)
+    {
+        req.session.userInput={
+            isError:true,
+            message:"User Already Exists",
+            name: userName,
+            email: userEmail,
+            password: password
+        };
+        return res.redirect("/login");
     }
 
     const data = await db.getDb().collection("members").insertOne(member);
@@ -100,13 +148,28 @@ app.post("/login",async(req,res)=>{
 
     if(!existingMember)
     {
+        req.session.userInput={
+            isError:true,
+            message:"Member Does Not Exist",
+            name: "",
+            email: userEmail,
+            password: userPassword
+        };
         return res.redirect("/signup");
     }
 
     const passwordEqual = await bcrypt.compare(userPassword,existingMember.userPassword);
 
-    if(!passwordEqual)
+    if(!userEmail || !userPassword || !passwordEqual || userPassword.length<5 || !userEmail.includes("@"))
     {
+        req.session.userInput={
+            isError:true,
+            message:"Password Entered is Incorrect",
+            name: "",
+            email: userEmail,
+            password: userPassword
+        };
+
         return res.redirect("/login");
     }
 
@@ -123,12 +186,14 @@ app.post("/login",async(req,res)=>{
 app.get("/logout",async (req,res)=>{
     req.session.isAuthenticated = false;
     req.session.user = null;
+    req.session.userInput = null;
 
     res.redirect("/");
 });
 
-app.get("/profile",(req,res)=>{
-    res.render("profile");
+app.get("/profile",async (req,res)=>{
+    const user = await db.getDb().collection("members").findOne({_id:req.session.user.id});
+    res.render("profile",{user:user});
 });
 
 app.post("/profile",upload.single("userpic"),async (req,res)=>{
@@ -140,8 +205,6 @@ app.post("/profile",upload.single("userpic"),async (req,res)=>{
         const user = await db.getDb().collection("members").updateOne({_id:req.session.user.id},{$set:{userImage: files.path}});  
         return res.redirect("/");
     }
-
-    await db.getDb().collection("members").updateOne({_id:req.session.user.id},{$set:{userImage: "/images/profile.png"}});
 
     res.redirect("/");
 });

@@ -17,6 +17,11 @@
 
 <body>
     <main class="main-content">
+        <div id="image-cover">
+            <h3>Astro</h3>
+            <h4>Space and more.</h4>
+            <p>Explore the astronomical events, incidents and discoveries.</p>
+        </div>
         <div class="photo">
             <img src="/images/signup-image.jpg" alt="stars">
         </div>
@@ -25,18 +30,21 @@
                 <div>
                     <h1>Sign Up</h1>
                     <h2>Join The Space Adventure</h2>
+                    <% if(locals.input.isError) { %>
+                        <p id="Error"><%=locals.input.message%></p>
+                    <% } %>
                     <form action="/signup" method="POST" class="signup-form">
                         <div class="user-name">
                             <label for="username">Name</label>
-                            <input type="text" name="username" id="username" required>
+                            <input type="text" name="username" id="username" value="<%=locals.input.name%>" required>
                         </div>
                         <div class="user-email">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" required>
+                            <input type="email" name="email" id="email" value="<%=locals.input.email%>" required>
                         </div>
                         <div class="user-password">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" required>
+                            <input type="password" name="password" id="password" value="<%=locals.input.password%>" required>
                         </div>
                         <button type="submit">Sign Up</button>
                     </form>
