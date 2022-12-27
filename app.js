@@ -32,6 +32,7 @@ app.set("view engine","ejs");
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.static("public"));
+app.use(express.json());
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -56,7 +57,7 @@ app.use(function(req,res,next){
 
     req.session.userInput = null;
 
-    res.locals.input=input;
+    res.locals.input = input;
 
     next();
 });
@@ -77,6 +78,7 @@ app.get("/",async (req,res)=>{
     if(data.isAuth)
     {
         const user = await db.getDb().collection("members").findOne({_id:req.session.user.id});
+
         return res.render("index",{data:data,user:user});
     }
 
@@ -207,6 +209,30 @@ app.post("/profile",upload.single("userpic"),async (req,res)=>{
     }
 
     res.redirect("/");
+});
+
+app.get("/explore",(req,res)=>{
+
+    if(req.session.isAuthenticated)
+    {
+        return res.render("explore");
+    }
+    else
+    {
+        req.session.userInput={
+            isError:true,
+            message:"Please Log in or Sign Up",
+            name: "",
+            email: "",
+            password: ""
+        }
+        res.redirect("/login");
+    }
+});
+
+app.get("/explore/:id",(req,res)=>{
+    const articleId = req.params.id;
+    res.render("article",{id:articleId});
 });
 
 db.getConnection().then()

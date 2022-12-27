@@ -12,6 +12,7 @@
         rel="stylesheet">
     <link href="/styles/home.css" rel="stylesheet">
     <script src="/scripts/home.js" defer></script>
+    <script src="/scripts/api.js" defer></script>
     <title>Astro</title>
 </head>
 
@@ -38,7 +39,7 @@
                         <li><a href="/signup">Sign Up</a></li>
                         <li><a href="/login">Log In</a></li>
                     <% } %>
-                    <li><a href="/about">About Us</a></li>
+                        <li><a href="/about">About Us</a></li>
                     <%if(user){%>
                         <a href="/profile"><img src="<%=user.userImage%>" id="profile-pic"></a>
                     <%}%>
@@ -64,9 +65,20 @@
                     </path>
                 </svg>
                 <h3>Explore</h3>
+                <a href="/explore" class="anc-btn"><button type="button" class="btn"><p class="btn-content">Explore More</p></button></a>
+                <div class="events">
+                    <ul class="event-list">
+                        <% for(let i=0;i<3;i++){%>
+                            <li class="list-item">
+                                <img src="" alt="image" class="nasaImage">
+                                <p class="nasaTitle"></p>
+                                <a href="" class="view-anc"><button class="view-btn">View</button></a>
+                            </li>
+                        <%}%>
+                    </ul>
+                </div>
             </div>
         </main>
-    </section>
     </section>
 </body>
 

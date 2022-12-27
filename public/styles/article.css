@@ -1,0 +1,40 @@
+*
+{
+    overflow: hidden;
+}
+
+#event-content
+{
+    background-image: linear-gradient(to bottom, rgba(71, 71, 71, 0.251), rgba(255, 178, 255, 0.286));
+    height: 100vh;
+}
+
+.events-article
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    height: 65vh;
+    padding: 0 2rem;
+}
+
+h1
+{
+    font-size: 3.15rem;
+    text-align: center;
+}
+
+#articleImage
+{
+    width: 80%;
+    height: 80%;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+#articlePara
+{
+    font-size: 1.5rem;
+    color: rgb(244, 235, 247);
+    font-family: "Montserrat",sans-serif;
+}

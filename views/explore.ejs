@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="/styles/home.css" rel="stylesheet">
+    <link href="/styles/explore.css" rel="stylesheet">
+    <script src="/scripts/api.js" defer></script>
+    <title>Explore | Astro</title>
+</head>
+<body>
+    <section class="animated-background-section">
+        <div class="animated-background">
+            <img src="/images/home-image.jpg" alt="nebula" id="background-image">
+        </div>
+    </section>
+    <section id="event-content">
+        <header>
+            <h1>Astro Events</h1>
+        </header>
+        <main>
+            <div class="events">
+                <ul class="event-list">
+                <% for(let i=0;i<9;i++){%>
+                    <li class="list-item">
+                        <img src="" alt="image" class="nasaImage">
+                        <p class="nasaTitle"></p>
+                        <a href="" class="view-anc"><button class="view-btn">View</button></a>
+                    </li>
+                <%}%>
+                </ul>
+            </div>
+        </main>
+    </section>
+</body>
+</html>
