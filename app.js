@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
+const bson = require("bson");
 const session = require("express-session");
 const mongoDbConnect = require("connect-mongodb-session");
 const mongoDbStore = mongoDbConnect(session);
@@ -79,10 +80,12 @@ app.get("/",async (req,res)=>{
     {
         const user = await db.getDb().collection("members").findOne({_id:req.session.user.id});
 
-        return res.render("index",{data:data,user:user});
+        const likeDatas = req.session.liked;
+
+        return res.render("index",{data:data,user:user,likeDatas:likeDatas});
     }
 
-    res.render("index",{data:data,user:null});
+    res.render("index",{data:data,user:null,likeDatas:null});
 });
 
 app.get("/signup",async (req,res)=>{
@@ -180,6 +183,7 @@ app.post("/login",async(req,res)=>{
         email: existingMember.userEmail
     }
     req.session.isAuthenticated = true;
+    req.session.liked=[];
     req.session.save(
         res.redirect("/")
     );
@@ -189,7 +193,7 @@ app.get("/logout",async (req,res)=>{
     req.session.isAuthenticated = false;
     req.session.user = null;
     req.session.userInput = null;
-
+    
     res.redirect("/");
 });
 
@@ -214,7 +218,7 @@ app.post("/profile",upload.single("userpic"),async (req,res)=>{
 app.get("/explore",(req,res)=>{
 
     if(req.session.isAuthenticated)
-    {
+    {   
         return res.render("explore");
     }
     else
@@ -228,6 +232,34 @@ app.get("/explore",(req,res)=>{
         }
         res.redirect("/login");
     }
+});
+
+app.get("/fetch",(req,res)=>{
+    const likeDatas = req.session.liked;
+    res.json(likeDatas);
+})
+
+app.post("/explore",(req,res)=>{
+    
+    const liked={
+        id: req.body.id,
+        index: req.body.index,
+        isLiked: req.body.isLiked
+    }
+    let changed = true;
+    for(let i=0;i<req.session.liked.length;i++)
+    {
+        if(req.session.liked[i].index === req.body.index)
+        {
+            req.session.liked[i].isLiked = req.body.isLiked;
+            changed=false;
+        }
+    }
+    if(changed)
+    {
+        req.session.liked.push(liked);
+    }
+    res.json();
 });
 
 app.get("/explore/:id",(req,res)=>{

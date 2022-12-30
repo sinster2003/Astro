@@ -43,3 +43,9 @@ h1
     align-items: center;
 }
 
+.list-item svg 
+{
+    position: absolute;
+    bottom:1.5rem;
+    left:1.5rem;
+}

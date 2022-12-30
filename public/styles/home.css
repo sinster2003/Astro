@@ -132,7 +132,7 @@ h3
     visibility: visible;
 }
 
-.main-content-div svg
+#arrowUp 
 {
     position: absolute;
     top: 3rem;
@@ -141,7 +141,7 @@ h3
     cursor: pointer;
 }
 
-.main-content-div svg path
+#arrowUp path
 {
     color: rgb(254, 246, 255);
 }
@@ -191,6 +191,24 @@ h3
     width: 25rem;
     border-radius: 10px;
     position: relative;
+}
+
+#heart,.heart-btn-clicked
+{
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    cursor: pointer;
+}
+
+#heart path,.heart-btn-clicked path
+{
+    color: rgb(53, 0, 60); 
+}
+
+.heart-btn-clicked
+{
+    display: none;
 }
 
 .btn
