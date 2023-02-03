@@ -3,6 +3,7 @@ const homeElement = document.querySelector(".home-content");
 const mainElement = document.querySelector(".main-content");
 const upArrowElement = document.querySelector(".main-content div svg");
 
+// Slider Javascript feature
 arrowElement.addEventListener("click",()=>{
     homeElement.classList.add("home-content-section-transform");
     setTimeout(()=>{

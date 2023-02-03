@@ -11,6 +11,7 @@ const app = express();
 
 const db = require("./data/database");
 
+//Multer package storing and rendering profile image using input file
 const imageStorage = multer.diskStorage({
     destination: (req,file,cb)=>{
         cb(null,"profileimages");
@@ -22,6 +23,7 @@ const imageStorage = multer.diskStorage({
 
 const upload = multer({storage: imageStorage});
 
+//mongodb connection to express session
 const mongo = new mongoDbStore({
     uri: "mongodb://127.0.0.1:27017",
     databaseName: "astro",
@@ -42,6 +44,7 @@ app.use(session({
 }));
 app.use("/profileimages",express.static("profileimages"));
 
+//customized middleware function to res.locals instead of {datas:data}
 app.use(function(req,res,next){
     let input = req.session.userInput;
 
@@ -82,10 +85,10 @@ app.get("/",async (req,res)=>{
 
         const likeDatas = req.session.liked;
 
-        return res.render("index",{data:data,user:user,likeDatas:likeDatas});
+        return res.render("index",{data:data,user:user,likeDatas:likeDatas,loggedOut: req.session.loggedOut});
     }
 
-    res.render("index",{data:data,user:null,likeDatas:null});
+    res.render("index",{data:data,user:null,likeDatas:null,loggedOut: req.session.loggedOut});
 });
 
 app.get("/signup",async (req,res)=>{
@@ -183,7 +186,15 @@ app.post("/login",async(req,res)=>{
         email: existingMember.userEmail
     }
     req.session.isAuthenticated = true;
-    req.session.liked=[];
+    req.session.loggedOut = false;
+    if(!req.session.liked || req.session.liked === null || req.session.liked===undefined)
+    {
+        req.session.liked=[];  
+    }
+    else
+    {
+        req.session.liked=req.session.liked;
+    }
     req.session.save(
         res.redirect("/")
     );
@@ -193,6 +204,7 @@ app.get("/logout",async (req,res)=>{
     req.session.isAuthenticated = false;
     req.session.user = null;
     req.session.userInput = null;
+    req.session.loggedOut = true;
     
     res.redirect("/");
 });
@@ -234,11 +246,13 @@ app.get("/explore",(req,res)=>{
     }
 });
 
+//Ajax request to pass the information the client side 
 app.get("/fetch",(req,res)=>{
     const likeDatas = req.session.liked;
     res.json(likeDatas);
 })
 
+//Ajax request to post the liked articles info
 app.post("/explore",(req,res)=>{
     
     const liked={
@@ -252,6 +266,7 @@ app.post("/explore",(req,res)=>{
         if(req.session.liked[i].index === req.body.index)
         {
             req.session.liked[i].isLiked = req.body.isLiked;
+            req.session.liked[i].id = req.body.id;
             changed=false;
         }
     }

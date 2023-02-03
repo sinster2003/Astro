@@ -3,6 +3,7 @@ const imageInputElement = document.getElementById("userpic");
 const paraElement = document.getElementById("instruction");
 const defaultPic = profileImageElement.src;
 
+// change the input image and preview feature
 imageInputElement.addEventListener("change",()=>{
     const imageFile = imageInputElement.files[0];
     const imagePath = URL.createObjectURL(imageFile);
